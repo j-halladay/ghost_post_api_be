@@ -14,14 +14,14 @@ class MessageViewSet(viewsets.ModelViewSet):
     queryset = Message.objects.all()
     serializer_class = MessageSerializer
 
-    @action(methods=['get'], detail=True)
+    @action(methods=['post'], detail=True)
     def upvote(self, request, pk):
         m = Message.objects.get(pk=pk)
         m.like += 1
         m.save()
         return JsonResponse({'status': '200'})
 
-    @action(methods=['get'], detail=True)
+    @action(methods=['post'], detail=True)
     def downvote(self, request, pk):
         m = Message.objects.get(pk=pk)
         m.like -= 1
